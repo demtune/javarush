@@ -14,14 +14,32 @@ public class Solution {
     }
 
     public static Planet thePlanet;
-
     static {
-        readKeyFromConsoleAndInitPlanet();
+        try {
+            readKeyFromConsoleAndInitPlanet();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //add static block here - добавьте статический блок тут
 
-    public static void readKeyFromConsoleAndInitPlanet() {
-        // implement step #5 here - реализуйте задание №5 тут
+    public static void readKeyFromConsoleAndInitPlanet() throws IOException {
+        String s = new BufferedReader(new InputStreamReader(System.in)).readLine();
+
+        switch (s){
+            case Planet.EARTH:
+                thePlanet = Earth.getInstance();
+                break;
+            case Planet.MOON:
+                thePlanet = Moon.getInstance();
+                break;
+            case Planet.SUN:
+                thePlanet = Sun.getInstance();
+                break;
+            default:
+                thePlanet = null;
+                break;
+        }
     }
 }
