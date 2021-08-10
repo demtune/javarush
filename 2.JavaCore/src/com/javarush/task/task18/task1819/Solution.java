@@ -16,7 +16,7 @@ public class Solution {
         try (FileInputStream fileInputStream1 = new FileInputStream(fileName1);
              FileInputStream fileInputStream2 = new FileInputStream(fileName2)){
             while (fileInputStream2.available()> 0) {
-                byteArrayOutputStream.write(fileInputStream2.read());   //считали второй и байтарай
+                byteArrayOutputStream.write(fileInputStream2.read());   //считали второй и записали в байтарай
             }
 
             while (fileInputStream1.available() > 0) {

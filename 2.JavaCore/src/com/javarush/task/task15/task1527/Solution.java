@@ -9,9 +9,10 @@ import java.io.InputStreamReader;
 */
 
 public class Solution {
-    public static void main(String[] args) {
-        
-        //add your code here
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String url = reader.readLine();
+        //напишите тут ваш код
     }
 
     public static void alert(double value) {
