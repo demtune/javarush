@@ -12,69 +12,50 @@ import java.util.TreeSet;
 */
 
 public class Solution {
-    public static void main(String[] args) throws IOException {
-
+    public static void main(String[] args) {
         TreeMap<String, Double> map = new TreeMap<>();
+        String fileName = args[0];  //первым парамом приходит имя файла
 
-        String fileName = args[0];
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String[] splitedLine;
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {    //прочитали файл
+            String[] splitLine;
             String line;
-             
+            Double currentValue;
 
+            while ((line = reader.readLine()) != null) {
+                splitLine = line.split(" ");        //разбили, прочитали строку и добавили в массив
+                String name = splitLine[0];
+                double value = Double.parseDouble(splitLine[1]);
+
+                if (map.containsKey(name)) {
+                    currentValue = map.get(name);       //если имя совпадает складываем значения
+                    map.put(name, value + currentValue);    // и добавляем в паму
+                } else {
+                    map.put(name, value);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        double max = map.firstEntry().getValue();   //первое и самое маленькое значение в тримап
+        for (double value : map.values()) {
+            if (value > max) {
+                max = value;
+            }
+        }
 
+        TreeSet<String> names = new TreeSet<>();    //трисет имен если значения макса совпадают добавляем в трисет
+        for (String name : map.keySet()) {
+            if (max == map.get(name)) {
+                names.add(name);
+            }
+        }
+
+        for (String name : names) {             //выводим трисет
+            System.out.println(name);
+        }
     }
 }
-
-
-
-
-
-
-//    TreeMap<String, Double> salary = new TreeMap<>();
-//
-//    String fileName = args[0];
-//
-//        try (BufferedReader rd = new BufferedReader(new FileReader(fileName))) {
-//                String[] splitedLine;
-//                String line;
-//                Double currentValue;
-//
-//                while ((line = rd.readLine()) != null) {
-//                splitedLine = line.split(" ");
-//                String name = splitedLine[0];
-//                double value = Double.parseDouble(splitedLine[1]);
-//
-//                if (salary.containsKey(name)) {
-//                currentValue = salary.get(name);
-//                salary.put(name, value + currentValue);
-//                } else {
-//                salary.put(name, value);
-//                }
-//                }
-//                } catch (IOException ignore) {
-//                /*NOP */
-//                }
-//
-//                double maxSalary = salary.firstEntry().getValue();
-//                for (double value : salary.values()) {
-//                if (value > maxSalary) {
-//                maxSalary = value;
-//                }
-//                }
-//
-//                TreeSet<String> names = new TreeSet<>();
-//        for (String name : salary.keySet()) {
-//        if (maxSalary == salary.get(name)) {
-//        names.add(name);
-//        }
-//        }
-//
-//        for (String name : names) {
-//        System.out.println(name);
-//        }
-//        }
-//        }

@@ -32,7 +32,6 @@ public class Solution {
 
         if (args == null || args.length < 1) {
             throw new RuntimeException();
-            KYTWKLu^MyL8
         }
         Date birthDay;
         Person person;
